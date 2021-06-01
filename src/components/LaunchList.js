@@ -1,16 +1,29 @@
 import rocketImage from '../images/falcon-9.jpg';
 import { graphql, } from '@apollo/client/react/hoc';
 import { query } from '../queries/launches'
-import { Spinner } from './Spinner';
+import { Spinner } from './Spinner.tsx';
 import { PaginationBar } from './PaginationBar.js'
-import { Navbar } from './Navbar'
-
+import { Navbar } from './Navbar.js'
 
 const LaunchList = ( props ) => {
+  
   console.log(props,"[LaunchList]")
+
   const renderContent = () => {
     if(props.data.loading){
       return(<Spinner/>)
+    }
+    else if(props.data.launchesPast.length == 0){
+      // props.history.push('/1')
+      return( 
+        <>
+          <Navbar/>
+          <div className="text-white pt-60">
+            <h1 className="text-center text-8xl">404</h1>
+            <h2 className="text-center text-xl">Invalid page</h2>
+          </div>
+        </>
+      )
     }
     else{
       return (
@@ -53,7 +66,10 @@ const LaunchList = ( props ) => {
               })
             }
           </div>
-          <PaginationBar currentPage={props.match.params.id}/>
+          <PaginationBar 
+            dataCount={+props.data.launchesPast[0].id + ((+props.match.params.id-1)*10)} 
+            currentPage={+props.match.params.id}
+          />
         </>
       );
     }
@@ -63,5 +79,13 @@ const LaunchList = ( props ) => {
 
 
 export default graphql(query,{
-  options: (props) => { return { variables: { offset: +props.match.params.id*10 }  } }
+  options: (props) => { 
+    let id = +props.match.params.id-1;
+    if( id < 0 ){ id = 0 }
+    return { 
+      variables: { 
+        offset: (id)*10 
+      }  
+    } 
+  }
 })(LaunchList);

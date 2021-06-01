@@ -3,17 +3,17 @@ import { gql } from '@apollo/client';
 export const query = gql`
 query launchesPast($offset: Int!) {
   launchesPast(limit: 10, offset: $offset) {
+    id
     mission_name
+    launch_date_local
+    launch_success
+    details
     links {
       flickr_images
     }
-    launch_date_local
     rocket {
       rocket_name
     }
-    launch_success
-    details
-    id
   }
 }
 `

@@ -1,4 +1,4 @@
-import { Navbar } from './Navbar'
+import { Navbar } from './Navbar.js'
 import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
@@ -7,7 +7,7 @@ export const HomePage = () => {
       <Navbar/>
       <div className="text-white pt-16">
        
-        <Link to="/0">Lauches</Link>
+        <Link className="bg-blue-600 border " to="/1">Lauches</Link>
         
       </div>
     </div>
