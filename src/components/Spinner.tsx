@@ -13,7 +13,7 @@ export const Spinner = () => {
           attributeName="transform" 
           attributeType="XML" 
           type="rotate"
-          dur="1s" 
+          dur="0.5s" 
           from="0 50 50"
           to="360 50 50" 
           repeatCount="indefinite" 
