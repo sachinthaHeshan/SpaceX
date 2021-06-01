@@ -1,8 +1,8 @@
-import { gql  } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-const query = gql`
-{
-  launchesPast(limit: 10) {
+export const query = gql`
+query launchesPast($offset: Int!) {
+  launchesPast(limit: 10, offset: $offset) {
     mission_name
     links {
       flickr_images
@@ -17,4 +17,4 @@ const query = gql`
   }
 }
 `
-export default query;
+

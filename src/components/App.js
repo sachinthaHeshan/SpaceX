@@ -1,31 +1,16 @@
-import { graphql } from '@apollo/client/react/hoc';
-import query from '../queries/launches'
-import { Navbar } from './Navbar'
-import { LaunchList } from './LaunchList'
+import { HashRouter as Router , Route} from 'react-router-dom';
+import LaunchList from './LaunchList'
+import { HomePage } from './HomePage'
 
 const  App = ( props ) => {
-  console.log(props)
-
-  const renderLaunchers = () => {
-    if(props.data.loading){
-      return(<h1>Loading...</h1>)
-    }
-    else{
-      return (
-        <LaunchList launchData={ props.data.launchesPast }/>
-      );
-    }
-  }
 
   return(
-    <div className="App text-white">
-      <Navbar/>
-      {
-        renderLaunchers()
-      }
-    </div>
+    <Router>
+      <Route exact={true} path="/" component={HomePage} />
+      <Route path="/:id" component={LaunchList}/>
+    </Router>
   )
 
 }
 
-export default graphql(query)(App);
+export default (App);
