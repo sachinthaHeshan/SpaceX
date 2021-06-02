@@ -1,8 +1,9 @@
 import { HashRouter as Router , Route} from 'react-router-dom';
 import LaunchList from './LaunchList'
 import { HomePage } from './HomePage'
+import { FC } from 'react'
 
-const  App = ( props ) => {
+const  App:FC = () => {
 
   return(
     <Router>

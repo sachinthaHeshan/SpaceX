@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
+import { FC } from 'react'
 
-export const PaginationBar = ({ currentPage, dataCount }) => {
+interface Props { currentPage:number, dataCount:number }
 
-  const paginationBar = {
+interface PaginationBar{
+  [index:string]: string[]
+}
+
+export const PaginationBar:FC<Props> = ({ currentPage, dataCount }) => {
+
+  const paginationBar: PaginationBar = {
     prevBtn : ["p-3", "bg-gray-500", "rounded-l-full"],
     prevPageBtnMin1 : ["p-3", "bg-gray-500"],
     prevPageBtn : ["p-3", "bg-gray-500"],
@@ -12,7 +19,7 @@ export const PaginationBar = ({ currentPage, dataCount }) => {
     nextBtn : ["p-3", "bg-gray-500", "rounded-r-full"],
   }
 
-  const pageCount = dataCount%10 ? Math.trunc(+dataCount/10)+1 : Math.trunc(+dataCount/10);
+  const pageCount: number = dataCount%10 ? Math.trunc(+dataCount/10)+1 : Math.trunc(+dataCount/10);
 
   if(currentPage <= 2 ){
     paginationBar.prevPageBtnMin1.push("hidden")

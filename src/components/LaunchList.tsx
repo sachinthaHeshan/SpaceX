@@ -1,15 +1,43 @@
 import imageNotFound from '../images/image-not-found.png';
 import { graphql } from '@apollo/client/react/hoc';
 import { query } from '../queries/launches'
-import { Spinner } from './Spinner.tsx';
-import { PaginationBar } from './PaginationBar.js'
-import { Navbar } from './Navbar.js'
+import { Spinner } from './Spinner';
+import { PaginationBar } from './PaginationBar'
+import { Navbar } from './Navbar'
 
-const LaunchList = ( props ) => {
+interface Props {
+  data: {
+    loading : boolean,
+    launchesPast : [Launch]
+  },
+  match: {
+    params : {
+      id : string
+    }
+  },
+  history : any
+}
+
+interface Launch {
+  id : number,
+  mission_name : string,
+  links : {
+    flickr_images : any[]
+  },
+  rocket: {
+    rocket_name : string
+  },
+  launch_date_local : string,
+  launch_success : boolean,
+  details : string,
+}
+
+
+const LaunchList = ( props : Props ) => {
   
   if(props.data.loading){return(<Spinner/>)}
 
-  else if(props.data.launchesPast.length == 0){
+  else if(props.data.launchesPast.length < 1 ){
     return( 
       <>
         <Navbar/>
@@ -28,7 +56,7 @@ const LaunchList = ( props ) => {
         <div className="text-white pt-16">
         <h1 className="text-2xl pl-6 pt-4">✤ LAUNCHES</h1>
           {
-            props.data.launchesPast.map(launch => {
+            props.data.launchesPast.map((launch) => {
               return(
                 <div 
                   className="rounded-2xl border-4 bg-gray-500 border-gray-500 m-6"
@@ -42,20 +70,21 @@ const LaunchList = ( props ) => {
                     className="rounded-lg object-cover float-none  sm:float-left m-auto sm:m-1"
                     src={launch.links.flickr_images[0] ? launch.links.flickr_images[0] : imageNotFound}
                     style={{width:"300px",height:"300px"}}
+                    alt={launch.mission_name}
                   />
                   <div className="">
                     Rocket Name :&nbsp;
-                    <span className="text-sm">{launch.rocket.rocket_name}</span>
+                    <span className="text-sm">{ launch.rocket.rocket_name }</span>
                     <br/>
                     Launch Date :&nbsp;
-                    <span className="text-sm">{new Date(launch.launch_date_local).toDateString()}</span>
+                    <span className="text-sm">{ new Date(launch.launch_date_local).toDateString() }</span>
                     <br/>
                     Success :&nbsp;
-                    <span className="text-sm">{launch.launch_success ? "✅" : "❌"}</span>
+                    <span className="text-sm">{ launch.launch_success ? "✅" : "❌" }</span>
                     <br/>
                     Description :&nbsp;
                     <br/>
-                    <span className="text-sm">{launch.details ? launch.details : ""}</span> 
+                    <span className="text-sm">{ launch.details ? launch.details : "" }</span> 
                   </div>
                 </div>
               )
@@ -73,8 +102,8 @@ const LaunchList = ( props ) => {
   
 
 export default graphql(query,{
-  options: (props) => { 
+  options: (props:Props) => { 
     if(+props.match.params.id-1 < 0){ props.history.push('/1', {}) }
     return { variables: { offset: ( +props.match.params.id-1)*10 }  } 
   }
-})(LaunchList);
+})(LaunchList)
