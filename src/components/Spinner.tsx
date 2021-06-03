@@ -2,8 +2,12 @@ export const Spinner = () => {
   return(
     <div className="w-28 m-auto pt-40">
       <svg 
-        version="1.1" id="L9" x="0px" y="0px"
-        viewBox="0 0 100 100" enableBackground="new 0 0 0 0" 
+        version="1.1" 
+        id="L9" 
+        x="0px" 
+        y="0px"
+        viewBox="0 0 100 100" 
+        enableBackground="new 0 0 0 0" 
       >
         <path 
           fill="#00f" 

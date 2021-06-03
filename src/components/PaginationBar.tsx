@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react'
 
-interface Props { currentPage:number, dataCount:number }
+interface Props { currentPage:number, dataCount:number, searchValue:string}
 
 interface PaginationBar{
   [index:string]: string[]
 }
 
-export const PaginationBar:FC<Props> = ({ currentPage, dataCount }) => {
+export const PaginationBar:FC<Props> = ({ currentPage, dataCount, searchValue }) => {
 
   const paginationBar: PaginationBar = {
     prevBtn : ["p-3", "bg-gray-500", "rounded-l-full"],
@@ -40,25 +40,38 @@ export const PaginationBar:FC<Props> = ({ currentPage, dataCount }) => {
 
   return(
     <div className="flex justify-center mb-10">
-      <Link className={paginationBar.prevBtn.join(" ")} to={String(+currentPage-1)}>
+      <Link 
+        className={paginationBar.prevBtn.join(" ")} 
+        to={"/"+String(+currentPage-1)+"/"+String(searchValue)}
+      >
         <i  className="fa fa-angle-left"></i>
       </Link>
-      <Link className={paginationBar.prevPageBtnMin1.join(" ")} to={String(+currentPage-2)}>
+      <Link 
+        className={paginationBar.prevPageBtnMin1.join(" ")} 
+        to={"/"+String(+currentPage-2)+"/"+String(searchValue)}>
         {+currentPage-2}
       </Link>
-      <Link className={paginationBar.prevPageBtn.join(" ")} to={String(+currentPage-1)}>
+      <Link 
+        className={paginationBar.prevPageBtn.join(" ")} 
+        to={"/"+String(+currentPage-1)+"/"+String(searchValue)}>
         {+currentPage-1}
       </Link>
       <div className={paginationBar.currentPageBtn.join(" ")}>
         {currentPage}
       </div>
-      <Link className={paginationBar.nextPageBtn.join(" ")} to={String(+currentPage+1)}>
+      <Link 
+        className={paginationBar.nextPageBtn.join(" ")} 
+        to={"/"+String(+currentPage+1)+"/"+String(searchValue)}>
         {+currentPage+1}
       </Link>
-      <Link className={paginationBar.nextPagePlus1.join(" ")} to={String(+currentPage+2)}>
+      <Link 
+        className={paginationBar.nextPagePlus1.join(" ")} 
+        to={"/"+String(+currentPage+2)+"/"+String(searchValue)}>
         {+currentPage+2}
       </Link>
-      <Link className={paginationBar.nextBtn.join(" ")} to={String(+currentPage+1)}>
+      <Link 
+        className={paginationBar.nextBtn.join(" ")} 
+        to={"/"+String(+currentPage+1)+"/"+String(searchValue)}>
         <i className="fa fa-angle-right"></i>
       </Link>
     </div>
