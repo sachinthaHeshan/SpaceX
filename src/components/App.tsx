@@ -1,5 +1,5 @@
 import { HashRouter as Router , Route } from 'react-router-dom';
-import LaunchList from './LaunchList'
+import { LaunchList } from './LaunchList'
 import { HomePage } from './HomePage'
 import { FC } from 'react'
 

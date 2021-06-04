@@ -1,6 +1,6 @@
 import { Link, Redirect } from 'react-router-dom';
 import logo from '../images/logo.png';
-import { PopupSearchBar } from './PopupSearchBar'
+import { PopupSearchBox } from './PopupSearchBox'
 import { FC, useState } from 'react'
 
 interface NavbarProps{
@@ -53,7 +53,7 @@ export const Navbar:FC<NavbarProps> = ({ searchVisible, search }) => {
       </div>
       { 
         popUpSearchVisible 
-          ? <PopupSearchBar 
+          ? <PopupSearchBox 
               onchange={setSearchValue}  
               value={searchValue} 
               setVisible={setPopUpSearchVisible}

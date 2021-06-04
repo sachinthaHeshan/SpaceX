@@ -4,6 +4,7 @@ import { query } from '../queries/launches'
 import { Spinner } from './Spinner';
 import { PaginationBar } from './PaginationBar'
 import { Navbar } from './Navbar'
+import { FC } from 'react';
 
 interface LaunchListProps {
   data: {
@@ -34,15 +35,17 @@ interface Launch {
   details: string,
 }
 
-const LaunchList = ( { match, history }: LaunchListProps ) => {
+export const LaunchList:FC<LaunchListProps> = ( { match, history } ) => {
 
-  if(+match.params.page-1 < 0){ history.push('/1', {}) }
+  const page = +match.params.page ? +match.params.page : 1
+
+  if(page-1 < 0){ history.push('/1', {}) }
 
   const search = match.params.search ? match.params.search : "" 
 
   const { loading, error, data } = useQuery(query, {
     variables: {
-      offset: ( +match.params.page-1)*10 ,
+      offset: ( page-1)*10 ,
       search 
     }
   });
@@ -63,7 +66,7 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
 
   }
 
-  if(data.dataCount.length < 1 && search === ""){
+  if(data.dataCount.length > 0 && data.launchesPast.length < 1){
 
     return( 
       <>
@@ -142,7 +145,7 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
 
         <PaginationBar
           dataCount={+data.dataCount.length} 
-          currentPage={+match.params.page}
+          currentPage={page}
           searchValue={search}
         />
       </>
@@ -150,5 +153,3 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
 
   }
 }
-  
-export default LaunchList;

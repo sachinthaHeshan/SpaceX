@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { FC, useRef, useEffect } from 'react'
 
-interface PopupSearchBarProps{
+interface PopupSearchBoxProps{
   value:string,
   onchange:any,
   setVisible:any
   }
 
-export const PopupSearchBar:FC<PopupSearchBarProps> = ({value, onchange, setVisible}) =>{
+export const PopupSearchBox:FC<PopupSearchBoxProps> = ({value, onchange, setVisible}) =>{
 
   const searchFeild = useRef<any>();
 
@@ -24,7 +24,7 @@ export const PopupSearchBar:FC<PopupSearchBarProps> = ({value, onchange, setVisi
 
   return(
     <div 
-      className="fixed text-white rounded-full mt-1 p-2 pr-4 sm:hidden shadow-2xl top-16 bg-gray-600 "
+      className="fixed text-white rounded-full mt-1 p-2 pr-4 sm:hidden shadow-2xl top-16 bg-gray-700 "
       style={{
         left:"calc(50% - calc(50% - 25px) + 20px)",
         width:"calc(100% - 100px)"
