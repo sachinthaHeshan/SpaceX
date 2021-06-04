@@ -50,6 +50,7 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
   if(loading){return(<Spinner/>)}
 
   if(error){
+
     return(
       <>
       <Navbar searchVisible={false}/>
@@ -59,9 +60,11 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
       </div>
       </>
     )
+
   }
 
   if(data.dataCount.length < 1 && search === ""){
+
     return( 
       <>
         <Navbar searchVisible={true} search={search}/>
@@ -71,9 +74,11 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
         </div>
       </>
     )
+
   }
 
   if(data.dataCount.length < 1 && search !== ""){
+
     return( 
       <>
         <Navbar searchVisible={true} search={search}/>
@@ -89,14 +94,16 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
         </div>
       </>
     )
+
   }
 
   else{
+
     return (
       <>
         <Navbar searchVisible={true} search={search}/>
-        <div style={{flex: "1 0 300px"}} className="text-white pt-16">
-          <h1 className="text-2xl  pl-6 pt-4">✤ LAUNCHES</h1>
+        <h1 className="text-2xl pl-6 pt-20 text-white">✤ LAUNCHES</h1>
+        <div className="md:grid md:grid-cols-2 text-white ">
           {
             data.launchesPast.map((launch:Launch) => {
               return(
@@ -113,19 +120,19 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
                     style={{width:"100%",height:"300px"}}
                     alt={launch.mission_name}
                   />
-                  <div className="p-2">
+                  <div className="p-2 text-sm">
                     Rocket Name :&nbsp;
-                    <span className="text-sm">{ launch.rocket.rocket_name }</span>
+                    <span className="text-xs">{ launch.rocket.rocket_name }</span>
                     <br/>
                     Launch Date :&nbsp;
-                    <span className="text-sm">{ new Date(launch.launch_date_local).toDateString() }</span>
+                    <span className="text-xs">{ new Date(launch.launch_date_local).toDateString() }</span>
                     <br/>
                     Success :&nbsp;
-                    <span className="text-sm">{ launch.launch_success ? "✅" : "❌" }</span>
+                    <span className="text-xs">{ launch.launch_success ? "✅" : "❌" }</span>
                     <br/>
                     Description :&nbsp;
                     <br/>
-                    <span className="text-sm">{ launch.details ? launch.details : "" }</span> 
+                    <span className="text-xs">{ launch.details ? launch.details : "" }</span> 
                   </div>
                 </div>
               )
@@ -140,6 +147,7 @@ const LaunchList = ( { match, history }: LaunchListProps ) => {
         />
       </>
     );
+
   }
 }
   
