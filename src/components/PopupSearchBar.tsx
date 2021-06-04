@@ -14,7 +14,7 @@ export const PopupSearchBar:FC<PopupSearchBarProps> = ({value, onchange, setVisi
   const hidePopupBox = () => {
     setTimeout(() => {
       setVisible(false)
-    })
+    },150)
   };
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const PopupSearchBar:FC<PopupSearchBarProps> = ({value, onchange, setVisi
 
   return(
     <div 
-      className="fixed rounded-full mt-1 p-2 pr-4 sm:hidden top-16 bg-gray-700 opacity-95"
+      className="fixed text-white rounded-full mt-1 p-2 pr-4 sm:hidden shadow-2xl top-16 bg-gray-600 "
       style={{
         left:"calc(50% - calc(50% - 25px) + 20px)",
         width:"calc(100% - 100px)"
@@ -36,13 +36,13 @@ export const PopupSearchBar:FC<PopupSearchBarProps> = ({value, onchange, setVisi
           type="text" 
           value={value} 
           onChange={(event) => onchange(event.target.value)}
-          className="rounded-full outline-none p-1 pl-4 border-4 focus:border-blue-400 border-blue-200"
-          placeholder="search..."
+          className="rounded-full outline-none bg-gray-700 p-1 pl-4 border-4 border-gray-500 focus:border-gray-500"
+          placeholder="Search ..."
           style={{width:"calc(100% - 50px)"}}
         />
 
         <Link to={"/1/"+value}>
-          <i className="fa fa-search text-white ml-3 text-2xl"/>
+          <i className="fa fa-search ml-3 text-xl rounded-full bg-gray-500 px-2 py-1"/>
         </Link>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { PopupSearchBar } from './PopupSearchBar'
 import { FC, useState } from 'react'
@@ -21,27 +21,30 @@ export const Navbar:FC<NavbarProps> = ({ searchVisible, search }) => {
           <img className="pl-6" alt="SapceX Logo" src={logo}/>
         </Link>
         { searchVisible 
-          ? <div className="whitespace-nowrap ">
-              <input id="hihi"
-                type="text" 
+          ? <div className="whitespace-nowrap bg-gray-900 p-1 rounded-full">
+              <input
                 value={searchValue} 
                 onChange={(event) => setSearchValue(event.target.value)}
-                className="rounded-full hidden sm:inline outline-none p-1 pl-4 border-4 focus:border-blue-400 border-blue-200"
-                placeholder="search..."
+                className=" rounded-full text-white hidden bg-gray-900 
+                            sm:inline outline-none  pl-4 border-4
+                            focus:border-gray-900 border-gray-900 "
+                placeholder="Search ..."
               />
       
               <Link
-                className="hidden sm:inline" 
+                className="hidden bg-gray-700 p-2  rounded-full sm:inline" 
                 to={"/1/"+searchValue}
               >
-                <i className="fa fa-search text-white ml-2 text-2xl"/>
+                <i className="fa fa-search text-white text-xl"/>
               </Link>
+
               <button
-                className="focus:outline-none inline sm:hidden"
+                className="focus:outline-none inline bg-gray-700 rounded-full p-1 px-2 sm:hidden"
                 onClick={() => setPopUpSearchVisible(true)}
               >
-              <i className="fa fa-search text-white ml-2 text-2xl"/>
+              <i className="fa fa-search text-white  text-xl"/>
               </button>
+
             </div> 
           : "" 
         }
